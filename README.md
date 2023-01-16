@@ -13,6 +13,8 @@ Or type in your terminal:
 
 `make install_requirements`
 
+---
+
 ### Recommended git workflow
 
 #### Sync with origin
