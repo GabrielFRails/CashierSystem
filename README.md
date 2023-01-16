@@ -15,9 +15,12 @@ Or type in your terminal:
 
 ### Recommended git workflow
 
-# To start a new work/task
+#### Sync with origin
 - `git checkout main`
 - `git fetch origin -p`
 - `git rebase origin/main`
+
+#### To start a new work/task
+- After executed the sync
 - `git checkout -b main_{work description}`
--- exemple: git checkout -b main_clients_api`
+	- exemple: `git checkout -b main_clients_api`
