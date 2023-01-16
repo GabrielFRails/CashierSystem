@@ -12,3 +12,12 @@ Install all missing dependencies at once:
 Or type in your terminal:
 
 `make install_requirements`
+
+### Recommended git workflow
+
+# To start a new work/task
+- `git checkout main`
+- `git fetch origin -p`
+- `git rebase origin/main`
+- `git checkout -b main_{work description}`
+-- exemple: git checkout -b main_clients_api`
