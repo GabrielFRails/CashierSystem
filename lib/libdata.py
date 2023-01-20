@@ -5,20 +5,22 @@ class DatabaseBase:
 # {
 	def __init__(self):
 		self.__host = "localhost"
-		self.__user = "postgress"
+		self.__user = "postgres"
 		self.__password = "postgress"
 	
 	def connect(self, database):
+		print(f"Connecting in \nHost: {self.__host} \nUser: {self.__user} \nPassword: {self.__password}")
 		db = psg2.connect(host=self.__host, database=database, user=self.__user, password=self.__password)
 		self.postgress_instance = db
 	
-	def connect_loop(self, database=None):
+	def connect_loop(self, database="postgress"):
 		if not database:
 			return -1
 	
 		while True:
 			try:
 				self.connect(database)
+				print("Connection ok")
 				break
 			except Exception as e:
 				print(f"Fail to connect to {self.__user}:{self.__host}")
@@ -34,4 +36,9 @@ class DatabaseBase:
 	
 	def db(self):
 		return self.postgress_instance
+	
+	def cursor(self):
+		conn = self.postgress_instance
+		curr = conn.cursor()
+		return curr
 # }
