@@ -3,6 +3,7 @@
 export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
 export LOGDIR=../log
+export PYTHONPATH=$(cd ../ && pwd)
 
 start_cashier_api()
 {
