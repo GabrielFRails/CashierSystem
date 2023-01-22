@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2023 Gabriel Freitas <gabriel.estudy.reis@gmail.com>
+#
+
 from pydantic import BaseModel
 from enum import Enum
 from pydantic import BaseModel, Field
