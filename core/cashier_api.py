@@ -10,7 +10,7 @@ from enum import Enum
 app = FastAPI()
 router = APIRouter()
 
-class Product(BaseModel):
+class product(BaseModel):
 # {
     id_product: str = Field(
         ""
@@ -51,11 +51,11 @@ def get_system_health():
     return {"success": True}
 
 @app.get("/product",
-    response_model=Product
+    response_model=product
 )
 def get_product(product_id: str):
 # {
-    r = Product()
+    r = product()
 
     return r
 # }
@@ -63,7 +63,7 @@ def get_product(product_id: str):
 @app.put("/product", 
     response_model=default_response_write_operation
 )
-def put_product(data: Product):
+def put_product(data: product):
 # {
     return { "success": True }
 # }
