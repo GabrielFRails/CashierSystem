@@ -1,17 +1,17 @@
 from lib.libdata import DatabaseBase
 
 querry_create_table = """CREATE TABLE ProductType (
-	idType integer NOT NULL,
+	idType INTEGER NOT NULL,
 	description CHARACTER VARYING,
 	CONSTRAINT ProductType_pkey PRIMARY KEY (idType)
 );"""
 
 querry_insert = """INSERT INTO ProductType (idType, description)
-values	(001, 'beverages'),
-	(002, 'cereals'),
-	(003, 'canned goods'),
-	(004, 'cold'),
-	(005, 'cleanup');"""
+values	(001, 'Beverages'),
+	(002, 'Cereals'),
+	(003, 'Canned goods'),
+	(004, 'Cold'),
+	(005, 'Cleanup');"""
 
 db = DatabaseBase()
 db.connect_loop("csystem")
