@@ -41,4 +41,8 @@ class DatabaseBase:
 		conn = self.postgress_instance
 		curr = conn.cursor()
 		return curr
+	
+	def close(self):
+		conn = self.postgress_instance
+		conn.close()
 # }
