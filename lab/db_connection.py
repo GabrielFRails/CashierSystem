@@ -1,29 +1,21 @@
 from lib.libdata import DatabaseBase
 
-querry_create_table = """CREATE TABLE ProductType (
-	idType INTEGER NOT NULL,
-	description CHARACTER VARYING,
-	CONSTRAINT ProductType_pkey PRIMARY KEY (idType)
-);"""
-
-querry_insert = """INSERT INTO ProductType (idType, description)
-values	(001, 'Beverages'),
-	(002, 'Cereals'),
-	(003, 'Canned goods'),
-	(004, 'Cold'),
-	(005, 'Cleanup');"""
+class product_type:
+	def __init__(self, tdata):
+		self.id_type = tdata[0]
+		self.description = tdata[1]
 
 db = DatabaseBase()
-db.connect_loop("csystem")
+db.connect_loop("market_place")
 conn = db.db()
 curr = db.cursor()
-curr.execute("DROP TABLE IF EXISTS ProductType")
-curr.execute(querry_create_table)
 conn.commit()
 
-curr.execute(querry_insert)
-
-curr.execute("SELECT * FROM ProductType")
+curr.execute("SELECT * FROM product_type")
 result = curr.fetchall()
 print(result)
 
+if result:
+	for r in result:
+		pt = product_type(r)
+		print(pt.__dict__)
