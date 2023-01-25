@@ -46,24 +46,3 @@ class DatabaseBase:
 		conn = self.postgress_instance
 		conn.close()
 # }
-
-class ProductDatabase(DatabaseBase):
-# {
-	def __init__(self, database="market_place"):
-		super().__init__()
-		self.connect_loop(database)
-
-	def get_product_types(self):
-		conn = self.db()
-		curr = self.cursor()
-		conn.commit()
-
-		curr.execute("SELECT * FROM product_type")
-		result = curr.fetchall()
-		self.close()
-
-		if not len(result):
-			return -1
-		
-		return result
-# }
