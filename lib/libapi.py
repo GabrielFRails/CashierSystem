@@ -20,6 +20,9 @@ class default_response_error(default_response):
 	message: response_message = response_message.FAIL
 	description: str
 
+class default_product_get_error(default_response_error):
+    description: str = "Product not found"
+
 class product(BaseModel):
 # {
     id_product: str = Field(
