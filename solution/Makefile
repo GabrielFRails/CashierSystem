@@ -18,3 +18,7 @@ start_database:
 
 cleandata:
 	psql -U postgres -h localhost -c "DROP DATABASE market_place;"
+
+log:
+	cd ../log/api/ && \
+	tail -f *api.log
