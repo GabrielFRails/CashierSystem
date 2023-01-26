@@ -44,3 +44,22 @@ class product(BaseModel):
         0
     )
 # }
+
+class product_request(BaseModel):
+# {
+    cod_product: str = Field(
+        ""
+    )
+    description: str = Field(
+        ""
+    )
+    unit: int = Field(
+        0
+    )
+    price: float = Field(
+        0.0
+    )
+    id_type: int = Field(
+        0
+    )
+# }
