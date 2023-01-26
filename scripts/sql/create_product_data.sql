@@ -9,7 +9,7 @@ CREATE TABLE product_type (
 DROP TABLE if exists product;
 
 CREATE TABLE product (
-	id_product INTEGER NOT NULL,
+	id_product CHARACTER VARYING,
 	cod_product CHARACTER VARYING,
 	description CHARACTER VARYING,
 	unit INTEGER NOT NULL,
