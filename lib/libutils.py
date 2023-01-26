@@ -1,4 +1,5 @@
 import datetime
+import uuid
 
 def utils_unixtimestamp_get():
 # {
@@ -6,4 +7,9 @@ def utils_unixtimestamp_get():
     unix_timestamp = datetime.datetime.timestamp(presentDate)
     
     return str(unix_timestamp)
+# }
+
+def utils_generate_id():
+# {
+    return str(uuid.uuid4()).split("-")[0].upper()
 # }
