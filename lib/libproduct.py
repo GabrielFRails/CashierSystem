@@ -126,7 +126,6 @@ def product_put(product):
 	pd = ProductDatabase()
 
 	id = 'CS_%s_TYPE%s' % (utils_generate_id(), product.id_type)
-	print(id)
 
 	return pd.put_product(product.__dict__, id)
 # }
