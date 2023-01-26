@@ -72,15 +72,13 @@ class ProductDatabase(DatabaseBase):
 
 		return result
 
-	def put_product(self, product, ts):
+	def put_product(self, product, id):
 		conn = self.db()
 		conn.commit()
 		curr = self.cursor()
 
 		sql_query = f"""INSERT INTO product (id_product, cod_product, description, unit, price, id_type)
-		values	({ts}, {product['cod_product']}, '{product['description']}', {product['unit']}, {product['price']}, {product['id_type']});"""
-
-		print(sql_query)
+		values	('{id}', {product['cod_product']}, '{product['description']}', {product['unit']}, {product['price']}, {product['id_type']});"""
 
 		curr.execute(sql_query)
 		conn.commit()
@@ -126,11 +124,9 @@ def product_get(id):
 def product_put(product):
 # {
 	pd = ProductDatabase()
-	ts = utils_unixtimestamp_get().replace(".", "")
 
-	print(ts, product.__dict__)
+	id = 'CS_%s_TYPE%s' % (utils_generate_id(), product.id_type)
+	print(id)
 
-	pd.put_product(product.__dict__, ts)
-
-	#return pd.put_product(product, ts)
+	return pd.put_product(product.__dict__, id)
 # }
