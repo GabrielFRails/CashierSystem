@@ -1,4 +1,6 @@
 from lib.libdata import *
+from lib.libutils import *
+from lib.libetl import *
 
 class ProductDatabase(DatabaseBase):
 # {
@@ -69,6 +71,20 @@ class ProductDatabase(DatabaseBase):
 			return -1
 
 		return result
+
+	def put_product(self, product, ts):
+		conn = self.db()
+		conn.commit()
+		curr = self.cursor()
+
+		sql_query = f"""INSERT INTO product (id_product, cod_product, description, unit, price, id_type)
+		values	({ts}, {product['cod_product']}, '{product['description']}', {product['unit']}, {product['price']}, {product['id_type']});"""
+
+		print(sql_query)
+
+		curr.execute(sql_query)
+		conn.commit()
+		self.close()
 # }
 
 def product_all_types_get():
@@ -91,8 +107,12 @@ def product_all_get():
 # {
 	pd = ProductDatabase()
 	products = pd.get_all_products()
+	products_etl = []
 
-	return products
+	for p in products:
+		products_etl.append(etl_product(p))
+
+	return products_etl
 # }
 
 def product_get(id):
@@ -101,4 +121,16 @@ def product_get(id):
 	product = pd.get_product_by_id(id)
 
 	return product
+# }
+
+def product_put(product):
+# {
+	pd = ProductDatabase()
+	ts = utils_unixtimestamp_get().replace(".", "")
+
+	print(ts, product.__dict__)
+
+	pd.put_product(product.__dict__, ts)
+
+	#return pd.put_product(product, ts)
 # }

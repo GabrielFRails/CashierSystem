@@ -41,7 +41,9 @@ def get_product(product_id: str):
 @app.put("/product", 
     response_model=default_response_write_operation
 )
-def put_product(data: product):
+def put_product(data: product_request):
 # {
+    product_put(data)
+
     return { "success": True }
 # }
