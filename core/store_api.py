@@ -45,9 +45,12 @@ def get_product(product_id: str = Query(
     response_model=default_response_write_operation,
     summary="Update product data"
 )
-def put_product(data: product_request):
+def put_product(data: product):
 # {
-    return { "message": "wip" }
+    product_update(data)
+
+    response = default_response_write_operation().__dict__
+    return response
 # }
 
 @app.post("/product", 
@@ -56,7 +59,8 @@ def put_product(data: product_request):
 )
 def put_product(data: product_request):
 # {
-    product_put(data)
+    product_post(data)
 
-    return { "success": True }
+    response = default_response_write_operation().__dict__
+    return response
 # }
