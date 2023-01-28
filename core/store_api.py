@@ -5,6 +5,7 @@
 from fastapi import APIRouter, FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from typing import Union
 
 from lib.libapi import *
 from lib.libproduct import *
@@ -83,6 +84,27 @@ def put_product(data: product):
 def put_product(data: product_request):
 # {
     product_post(data)
+
+    response = default_response_write_operation().__dict__
+    return response
+# }
+
+@app.delete("/product",
+    response_model=Union[default_response_write_operation, dict],
+    summary="Delete product data"
+)
+def delete_product(product_id: str = Query(
+    title="",
+    description="Product id"
+)):
+# {
+    rows_deleted = product_delete(product_id)
+
+    if not rows_deleted:
+        return {
+            "success": False,
+            "message": "0 rows deleted"
+        }
 
     response = default_response_write_operation().__dict__
     return response

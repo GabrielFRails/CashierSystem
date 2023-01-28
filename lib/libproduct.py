@@ -96,6 +96,20 @@ class ProductDatabase(DatabaseBase):
 		curr.execute(sql_query)
 		conn.commit()
 		self.close()
+
+	def delete_product(self, id):
+		conn = self.db()
+		conn.commit()
+		curr = self.cursor()
+
+		sql_query = f"""DELETE from product where id_product = '{id}';"""
+
+		curr.execute(sql_query)
+		rows_deleted = curr.rowcount
+		conn.commit()
+		self.close()
+
+		return rows_deleted
 # }
 
 def product_all_types_get():
@@ -132,6 +146,14 @@ def product_get(id):
 	product = pd.get_product_by_id(id)
 
 	return product
+# }
+
+def product_delete(id):
+# {
+	pd = ProductDatabase()
+	rd = pd.delete_product(id)
+
+	return rd
 # }
 
 def product_post(product):
