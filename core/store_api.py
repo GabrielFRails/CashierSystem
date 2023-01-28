@@ -66,7 +66,7 @@ def get_product_list():
 # }
 
 @app.put("/product", 
-    response_model=default_response_write_operation,
+    response_model=Union[default_response_write_operation, dict],
     summary="Update product data"
 )
 def put_product(data: product):
@@ -77,6 +77,15 @@ def put_product(data: product):
         return JSONResponse(
 		status_code=400, 
 		content=default_response_writefail_operation().dict()
+	)
+
+    if r == 0:
+        return JSONResponse(
+		status_code=400, 
+		content={
+            "success": "FALSE",
+            "message": "id not found"
+        }
 	)
 
     response = default_response_write_operation().__dict__

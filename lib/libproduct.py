@@ -95,6 +95,7 @@ class ProductDatabase(DatabaseBase):
 		conn = self.db()
 		conn.commit()
 		curr = self.cursor()
+		rc = -1
 
 		sql_query = f"""UPDATE product
 		SET description = '{product['description']}', unit = {product['unit']}, price = {product['price']}
@@ -103,13 +104,12 @@ class ProductDatabase(DatabaseBase):
 		try:
 			curr.execute(sql_query)
 			conn.commit()
+			rc = curr.rowcount
 		except Exception as e:
 			print(str(e))
-			self.close()
-			return -1
 		
 		self.close()
-		return 0
+		return rc
 
 	def delete_product(self, id):
 		conn = self.db()
