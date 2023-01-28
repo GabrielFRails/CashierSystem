@@ -2,7 +2,7 @@
 # Copyright (c) 2023 Gabriel Freitas <gabriel.estudy.reis@gmail.com>
 #
 
-from fastapi import APIRouter, FastAPI, Request, HTTPException
+from fastapi import APIRouter, FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
@@ -23,7 +23,10 @@ def get_system_health():
         400: { "model": default_product_get_error }
     }
 )
-def get_product(product_id: str):
+def get_product(product_id: str = Query(
+    title="",
+    description="Product id"
+)):
 # {
     sql_product = product_get(product_id)
     if not sql_product:
@@ -39,7 +42,17 @@ def get_product(product_id: str):
 # }
 
 @app.put("/product", 
-    response_model=default_response_write_operation
+    response_model=default_response_write_operation,
+    summary="Update product data"
+)
+def put_product(data: product_request):
+# {
+    return { "message": "wip" }
+# }
+
+@app.post("/product", 
+    response_model=default_response_write_operation,
+    summary="Create product data"
 )
 def put_product(data: product_request):
 # {
