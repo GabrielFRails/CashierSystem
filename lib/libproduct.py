@@ -72,7 +72,7 @@ class ProductDatabase(DatabaseBase):
 
 		return result
 
-	def put_product(self, product, id):
+	def create_product(self, product, id):
 		conn = self.db()
 		conn.commit()
 		curr = self.cursor()
@@ -127,5 +127,5 @@ def product_put(product):
 
 	id = 'CS_%s_TYPE%s' % (utils_generate_id(), product.id_type)
 
-	return pd.put_product(product.__dict__, id)
+	return pd.create_product(product.__dict__, id)
 # }
