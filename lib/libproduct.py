@@ -83,6 +83,19 @@ class ProductDatabase(DatabaseBase):
 		curr.execute(sql_query)
 		conn.commit()
 		self.close()
+	
+	def update_product(self, product):
+		conn = self.db()
+		conn.commit()
+		curr = self.cursor()
+
+		sql_query = f"""UPDATE product
+		SET description = '{product['description']}', unit = {product['unit']}, price = {product['price']}
+		WHERE id_product = '{product['id_product']}';"""
+
+		curr.execute(sql_query)
+		conn.commit()
+		self.close()
 # }
 
 def product_all_types_get():
@@ -121,7 +134,7 @@ def product_get(id):
 	return product
 # }
 
-def product_put(product):
+def product_post(product):
 # {
 	pd = ProductDatabase()
 
@@ -129,3 +142,8 @@ def product_put(product):
 
 	return pd.create_product(product.__dict__, id)
 # }
+
+def product_update(product):
+	pd = ProductDatabase()
+
+	return pd.update_product(product.__dict__)
