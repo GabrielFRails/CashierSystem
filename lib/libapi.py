@@ -63,3 +63,13 @@ class product_request(BaseModel):
         0
     )
 # }
+
+class product_list(BaseModel):
+# {
+    products: list[product] = Field(
+        []
+    )
+    count: int = Field(
+        0
+    )
+# }
