@@ -41,6 +41,29 @@ def get_product(product_id: str = Query(
     return r
 # }
 
+@app.get("/product/list",
+    response_model=product_list,
+    responses= {
+        400: { "model": default_product_get_error }
+    }
+)
+def get_product_list():
+# {
+    product_list = product_all_get()
+    if not len(product_list) > 0:
+        return JSONResponse(
+		status_code=400, 
+		content=default_product_get_error().dict()
+	)
+
+    response = {
+        "products": product_list,
+        "count": len(product_list)
+    }
+
+    return response
+# }
+
 @app.put("/product", 
     response_model=default_response_write_operation,
     summary="Update product data"

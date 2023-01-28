@@ -61,7 +61,7 @@ class ProductDatabase(DatabaseBase):
 		curr = self.cursor()
 
 		sql_query = f"""SELECT * FROM product as p
-		WHERE p.id_product = {id};"""
+		WHERE p.id_product = '{id}';"""
 
 		curr.execute(sql_query)
 		result = curr.fetchall()
