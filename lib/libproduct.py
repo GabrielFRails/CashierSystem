@@ -80,9 +80,16 @@ class ProductDatabase(DatabaseBase):
 		sql_query = f"""INSERT INTO product (id_product, cod_product, description, unit, price, id_type)
 		values	('{id}', {product['cod_product']}, '{product['description']}', {product['unit']}, {product['price']}, {product['id_type']});"""
 
-		curr.execute(sql_query)
-		conn.commit()
+		try:
+			curr.execute(sql_query)
+			conn.commit()
+		except Exception as e:
+			print(str(e))
+			self.close()
+			return -1
+		
 		self.close()
+		return 0
 	
 	def update_product(self, product):
 		conn = self.db()
@@ -93,9 +100,16 @@ class ProductDatabase(DatabaseBase):
 		SET description = '{product['description']}', unit = {product['unit']}, price = {product['price']}
 		WHERE id_product = '{product['id_product']}';"""
 
-		curr.execute(sql_query)
-		conn.commit()
+		try:
+			curr.execute(sql_query)
+			conn.commit()
+		except Exception as e:
+			print(str(e))
+			self.close()
+			return -1
+		
 		self.close()
+		return 0
 
 	def delete_product(self, id):
 		conn = self.db()

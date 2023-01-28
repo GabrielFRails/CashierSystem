@@ -30,7 +30,7 @@ def get_product(product_id: str = Query(
 )):
 # {
     sql_product = product_get(product_id)
-    if not sql_product:
+    if sql_product == -1:
         return JSONResponse(
 		status_code=400, 
 		content=default_product_get_error().dict()
@@ -54,7 +54,7 @@ def get_product_list():
     if not len(product_list) > 0:
         return JSONResponse(
 		status_code=400, 
-		content=default_product_get_error().dict()
+		content=default_productlist_get_error().dict()
 	)
 
     response = {
@@ -71,7 +71,13 @@ def get_product_list():
 )
 def put_product(data: product):
 # {
-    product_update(data)
+    r = product_update(data)
+
+    if r == -1:
+        return JSONResponse(
+		status_code=400, 
+		content=default_response_writefail_operation().dict()
+	)
 
     response = default_response_write_operation().__dict__
     return response
@@ -83,7 +89,13 @@ def put_product(data: product):
 )
 def put_product(data: product_request):
 # {
-    product_post(data)
+    r = product_post(data)
+
+    if r == -1:
+        return JSONResponse(
+		status_code=400, 
+		content=default_response_writefail_operation().dict()
+	)
 
     response = default_response_write_operation().__dict__
     return response

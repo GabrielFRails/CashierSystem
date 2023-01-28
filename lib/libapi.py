@@ -23,6 +23,12 @@ class default_response_error(default_response):
 class default_product_get_error(default_response_error):
     description: str = "Product not found"
 
+class default_productlist_get_error(default_response_error):
+    description: str = "No product data found in database"
+
+class default_response_writefail_operation(default_response):
+	description: str = "Fail to insert data in database"
+
 class product(BaseModel):
 # {
     id_product: str = Field(
