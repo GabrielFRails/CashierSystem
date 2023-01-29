@@ -13,3 +13,12 @@ def etl_product(p):
 
 	return data
 # }
+
+def etl_product_type(p):
+# {
+	data = product_type()
+
+	data.id_type = p[0]
+	data.description = p[1]
+
+	return data

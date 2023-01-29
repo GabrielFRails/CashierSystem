@@ -26,6 +26,12 @@ class default_product_get_error(default_response_error):
 class default_productlist_get_error(default_response_error):
     description: str = "No product data found in database"
 
+class default_product_type_get_error(default_response_error):
+    description: str = "Product type not found"    
+
+class default_product_type_list_get_error(default_response_error):
+    description: str = "No product type data found in database"
+
 class default_response_writefail_operation(default_response):
 	description: str = "Fail to insert data in database"
 
@@ -79,3 +85,25 @@ class product_list(BaseModel):
         0
     )
 # }
+
+class product_type(BaseModel):
+    id_type: str = Field(
+        ""
+    )
+    description: str = Field(
+        ""
+    )
+
+class product_type_request(BaseModel):
+    description: str = Field(
+        ""
+    )
+
+class product_type_list(BaseModel):
+
+    product_types: list[product_type] = Field(
+        []
+    )
+    count: int = Field(
+        0
+    )
