@@ -12,10 +12,7 @@ CREATE TABLE customer (
 	id_customer integer,
 	name CHARACTER VARYING NOT NULL,
 	phone CHARACTER VARYING,
-	id_cart INTEGER NOT NULL,
-	CONSTRAINT customer_pkey PRIMARY KEY (id_customer),
-	CONSTRAINT customer_id_cart_fkey FOREIGN KEY (id_cart)
-	REFERENCES cart (id_cart)
+	CONSTRAINT customer_pkey PRIMARY KEY (id_customer)
 );
 
 ALTER TABLE cart
