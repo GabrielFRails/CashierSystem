@@ -145,7 +145,7 @@ def get_product_type(product_type_id: str= Query(
     description = "Product Type id"
 )):
     sql_product_type = product_type_get(product_type_id)
-    if sql_product_type = -1:
+    if sql_product_type == -1:
         return JSONResponse(
             status_code = 400,
             content = default_product_type_get_error().dict()
@@ -158,7 +158,7 @@ def get_product_type(product_type_id: str= Query(
 
 @app.get("/product_type/list",
     response_model = product_type_list,
-    response = {
+    responses = {
         400: { "model": default_product_type_get_error }
     }
 )
@@ -186,7 +186,7 @@ def put_product_type(data: product_type):
 
     if r == -1:
         return JSONResponse(
-            status_code = 400.
+            status_code = 400,
             content = default_response_writefail_operation().dict()
         )
 
@@ -194,8 +194,8 @@ def put_product_type(data: product_type):
         return response
 
 @app.post("/product_type",
-    respose_model = default_response_write_operation,
-    summary = "CReate product type data"
+    response_model = default_response_write_operation,
+    summary = "Create product type data"
 )
 def put_product_type(data: product_type_request):
     r = product_type_post(data)

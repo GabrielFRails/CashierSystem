@@ -18,7 +18,7 @@ class ProductTypeDatabase(DatabaseBase):
         result = curr.fetchall()
         self.close()
 
-        if nor result:
+        if not result:
             return -1
 
         return result
