@@ -94,13 +94,13 @@ class ProductTypeDatabase(DatabaseBase):
 
 def product_type_all_get():
     pd = ProductTypeDatabase()
-    products = pd.get_all_product_types()
+    product_types = pd.get_all_product_types()
     product_types_etl = []
 
     for p in product_types:
         product_types_etl.append(etl_product_type(p))
 
-        return product_types_etl
+    return product_types_etl
 
 def product_type_delete(id):
     pd = ProductTypeDatabase()

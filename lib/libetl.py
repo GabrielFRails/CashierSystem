@@ -1,4 +1,4 @@
-from lib.libapi import product
+from lib.libapi import product, product_type
 
 def etl_product(p):
 # {

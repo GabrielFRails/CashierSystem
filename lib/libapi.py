@@ -100,7 +100,6 @@ class product_type_request(BaseModel):
     )
 
 class product_type_list(BaseModel):
-
     product_types: list[product_type] = Field(
         []
     )
