@@ -92,6 +92,14 @@ class ProductTypeDatabase(DatabaseBase):
 
         return rows_deleted
 
+def product_type_get(id):
+# {
+    ptd = ProductTypeDatabase()
+
+    product_type = ptd.get_product_type_by_id(id)
+    return product_type
+# }
+
 def product_type_all_get():
     pd = ProductTypeDatabase()
     product_types = pd.get_all_product_types()
@@ -104,7 +112,7 @@ def product_type_all_get():
 
 def product_type_delete(id):
     pd = ProductTypeDatabase()
-    rd = pd.delete_product(id)
+    rd = pd.delete_product_type(id)
 
     return rd
 

@@ -21,23 +21,6 @@ class ProductDatabase(DatabaseBase):
 			return -1
 		
 		return result
-    
-	def get_product_type(self, ptype):
-		conn = self.db()
-		conn.commit()
-		curr = self.cursor()
-
-		sql_query = f"""SELECT * FROM product_type as pt
-		WHERE pt.description = '{ptype}';"""
-
-		curr.execute(sql_query)
-		result = curr.fetchall()
-		self.close()
-
-		if not result:
-			return -1
-
-		return result
 
 	def get_all_products(self):
 		conn = self.db()
@@ -132,14 +115,6 @@ def product_all_types_get():
     product_types = pd.get_all_product_types()
 
     return product_types
-# }
-
-def product_type_get(product_type):
-# {
-	pd = ProductDatabase()
-	product_type = pd.get_product_type(product_type)
-
-	return product_type
 # }
 
 def product_all_get():
