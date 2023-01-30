@@ -190,8 +190,8 @@ def put_product_type(data: product_type):
             content = default_response_writefail_operation().dict()
         )
 
-        response = default_response_write_operation().__dict__
-        return response
+    response = default_response_write_operation().__dict__
+    return response
 
 @app.post("/product_type",
     response_model = default_response_write_operation,

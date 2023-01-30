@@ -32,7 +32,7 @@ class default_product_type_get_error(default_response_error):
 class default_product_type_list_get_error(default_response_error):
     description: str = "No product type data found in database"
 
-class default_response_writefail_operation(default_response):
+class default_response_writefail_operation(default_response_error):
 	description: str = "Fail to insert data in database"
 
 class product(BaseModel):
