@@ -1,14 +1,12 @@
-CREATE DATABASE market_place;
+DROP DATABASE market_place;
 
-DROP TABLE if exists product_type;
+CREATE DATABASE marketplace;
 
 CREATE TABLE product_type (
-	id_type integer NOT NULL,
+	id_type INTEGER NOT NULL,
 	description CHARACTER VARYING,
-	CONSTRAINT product_type_pkey PRIMARY KEY (id_type)
+	CONSTRAINT product_id_type_pkey PRIMARY KEY (id_type)
 );
-
-DROP TABLE if exists product;
 
 CREATE TABLE product (
 	id_product INTEGER NOT NULL,
@@ -24,10 +22,10 @@ CREATE TABLE product (
 
 INSERT INTO product_type (id_type, description)
 values	(001, 'Beverages'),
-	(002, 'Cereals'),
-	(003, 'Canned goods'),
-	(004, 'Cold'),
-	(005, 'Cleanup');
+		(002, 'Cereals'),
+		(003, 'Canned goods'),
+		(004, 'Cold'),
+		(005, 'Cleanup');
 
 insert into product (id_product, cod_product, description, unit, price, id_type)
 values	(061, 7899999912581,'Coke 2lts', 45, 10.00, 001),
@@ -46,16 +44,6 @@ values	(061, 7899999912581,'Coke 2lts', 45, 10.00, 001),
 	(507, 7895214567887, 'Liquid soap 500ml',108, 4.99,005),
 	(504, 7885513214556, 'Sanitary water 2l', 67, 12.99, 005);
 
-CREATE TABLE cart (
-	id_cart INTEGER NOT NULL,
-	sum NUMERIC,
-	discount NUMERIC,
-	id_product INTEGER,
-	CONSTRAINT cart_pkey PRIMARY KEY (id_Cart),
-	CONSTRAINT cart_id_product_fkey FOREIGN KEY (id_product)
-	REFERENCES product (id_product)
-);
-
 CREATE TABLE customer (
 	id_customer integer,
 	name CHARACTER VARYING NOT NULL,
@@ -63,7 +51,15 @@ CREATE TABLE customer (
 	CONSTRAINT customer_pkey PRIMARY KEY (id_customer)
 );
 
-ALTER TABLE cart
-	ADD id_customer INTEGER,
-	ADD CONSTRAINT cart_id_customer_fkey FOREIGN KEY (id_customer)
-	REFERENCES customer (id_customer);
+CREATE TABLE cart (
+	id_cart INTEGER NOT NULL,
+	sum NUMERIC,
+	discount NUMERIC,
+	id_product INTEGER,
+	id_customer INTEGER,
+	CONSTRAINT cart_pkey PRIMARY KEY (id_cart),
+	CONSTRAINT cart_id_product_fkey FOREIGN KEY (id_product)
+	REFERENCES product (id_product),
+	CONSTRAINT cart_id_customer_fkey FOREIGN KEY (id_customer)
+	REFERENCES customer (id_customer)
+);

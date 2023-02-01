@@ -22,10 +22,10 @@ CREATE TABLE product (
 
 INSERT INTO product_type (id_type, description)
 values	(001, 'Beverages'),
-	(002, 'Cereals'),
-	(003, 'Canned goods'),
-	(004, 'Cold'),
-	(005, 'Cleanup');
+		(002, 'Cereals'),
+		(003, 'Canned goods'),
+		(004, 'Cold'),
+		(005, 'Cleanup');
 
 INSERT INTO product (id_product, cod_product, description, unit, price, id_type)
 values	(061, 7899999912581,'Coke 2lts', 45, 10.00, 001),
