@@ -116,10 +116,10 @@ def product_type_delete(id):
 
     return rd
 
-def product_type_post(product):
+def product_type_post(product_type):
     ptd = ProductTypeDatabase()
 
-    id = 'CS_%s_TYPE%s' % (utils_generate_id())
+    id = 'CS_%s_PTYPE%s' % (utils_generate_id(), product_type.id_type)
 
     return ptd.create_product_type(product_type.__dict__, id)
 
