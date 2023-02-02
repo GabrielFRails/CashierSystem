@@ -1,4 +1,4 @@
-DROP DATABASE market_place;
+DROP DATABASE IF EXISTS market_place;
 
 CREATE DATABASE marketplace;
 
