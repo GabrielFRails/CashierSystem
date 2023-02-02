@@ -134,7 +134,7 @@ def delete_product(product_id: str = Query(
 # }
 
 #product type's routes
-@app.get("/product_type",
+@app.get("/product/type",
     response_model = product_type,
     responses = {
         400: { "model": default_product_type_get_error }
@@ -156,7 +156,7 @@ def get_product_type(product_type_id: str= Query(
 
     return r
 
-@app.get("/product_type/list",
+@app.get("/product/type/list",
     response_model = product_type_list,
     responses = {
         400: { "model": default_product_type_get_error }
@@ -177,7 +177,7 @@ def get_product_type_list():
 
     return response
 
-@app.put("/product_type",
+@app.put("/product/type",
     response_model = default_response_write_operation,
     summary = "Update product type"
 )
@@ -193,7 +193,7 @@ def put_product_type(data: product_type):
     response = default_response_write_operation().__dict__
     return response
 
-@app.post("/product_type",
+@app.post("/product/type",
     response_model = default_response_write_operation,
     summary = "Create product type data"
 )
@@ -209,7 +209,7 @@ def put_product_type(data: product_type_request):
         response = default_response_write_operation().__dict__
         return response
 
-@app.delete("/product_type",
+@app.delete("/product/type",
     response_model = Union[default_response_writefail_operation, dict],
     summary = "Delete product type data"
 )
