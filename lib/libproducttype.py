@@ -39,13 +39,13 @@ class ProductTypeDatabase(DatabaseBase):
 
         return result
 
-    def create_product_type(self, product_type, id):
+    def create_product_type(self, product_type):
         conn = self.db()
         conn.commit()
         curr = self.cursor()
 
         sql_query = f"""INSERT INTO product_type (id_type, description)
-        values ('{id}', {product_type['description']});"""
+        values (nextval('ptid_seq'), {product_type['description']});"""
 
         try:
             curr.execute(sql_query)
@@ -118,10 +118,7 @@ def product_type_delete(id):
 
 def product_type_post(product_type):
     ptd = ProductTypeDatabase()
-
-    id = 'CS_%s_PTYPE%s' % (utils_generate_id(), product_type.id_type)
-
-    return ptd.create_product_type(product_type.__dict__, id)
+    return ptd.create_product_type(product_type.__dict__)
 
 def product_type_update(product_type):
     ptd = ProductTypeDatabase()

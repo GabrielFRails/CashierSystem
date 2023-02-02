@@ -41,13 +41,13 @@ class ProductDatabase(DatabaseBase):
 
 		return result
 
-	def create_product(self, product, id):
+	def create_product(self, product):
 		conn = self.db()
 		conn.commit()
 		curr = self.cursor()
 
 		sql_query = f"""INSERT INTO product (id_product, cod_product, description, unit, price, id_type)
-		values	('{id}', {product['cod_product']}, '{product['description']}', {product['unit']}, {product['price']}, {product['id_type']});"""
+		values	(nextval('pid_seq'), {product['cod_product']}, '{product['description']}', {product['unit']}, {product['price']}, {product['id_type']});"""
 
 		try:
 			curr.execute(sql_query)
@@ -126,9 +126,6 @@ def product_delete(id):
 def product_post(product):
 # {
 	pd = ProductDatabase()
-
-	id = 'CS_%s_TYPE%s' % (utils_generate_id(), product.id_type)
-
 	return pd.create_product(product.__dict__, id)
 # }
 
