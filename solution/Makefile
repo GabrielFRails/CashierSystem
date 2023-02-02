@@ -10,7 +10,7 @@ runserver:
 	chmod +x runapis.sh && \
 	./runapis.sh
 
-start_database: cleandata
+start_database:
 	cd ../scripts/sql && \
 	psql -U postgres -h localhost -c "CREATE DATABASE marketplace;" && \
 	psql -U postgres -h localhost -d marketplace -a -f create_product_data.sql && \
