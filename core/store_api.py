@@ -206,8 +206,8 @@ def put_product_type(data: product_type_request):
             content = default_response_writefail_operation().dict()
         )
 
-        response = default_response_write_operation().__dict__
-        return response
+    response = default_response_write_operation().__dict__
+    return response
 
 @app.delete("/product/type",
     response_model = Union[default_response_writefail_operation, dict],
