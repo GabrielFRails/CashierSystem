@@ -101,8 +101,8 @@ def product_type_get(id):
 # }
 
 def product_type_all_get():
-    pd = ProductTypeDatabase()
-    product_types = pd.get_all_product_types()
+    ptd = ProductTypeDatabase()
+    product_types = ptd.get_all_product_types()
     product_types_etl = []
 
     for p in product_types:
@@ -111,19 +111,19 @@ def product_type_all_get():
     return product_types_etl
 
 def product_type_delete(id):
-    pd = ProductTypeDatabase()
-    rd = pd.delete_product_type(id)
+    ptd = ProductTypeDatabase()
+    rd = ptd.delete_product_type(id)
 
     return rd
 
 def product_type_post(product):
-    pd = ProductTypeDatabase()
+    ptd = ProductTypeDatabase()
 
     id = 'CS_%s_TYPE%s' % (utils_generate_id())
 
-    return pd.create_product_type(product_type.__dict__, id)
+    return ptd.create_product_type(product_type.__dict__, id)
 
 def product_type_update(product_type):
-    pd = ProductTypeDatabase()
+    ptd = ProductTypeDatabase()
 
-    return pd.update_product_type(product_type.__dict__)
+    return ptd.update_product_type(product_type.__dict__)
