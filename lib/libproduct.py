@@ -8,20 +8,6 @@ class ProductDatabase(DatabaseBase):
 		super().__init__()
 		self.connect_loop(database)
 
-	def get_all_product_types(self):
-		conn = self.db()
-		conn.commit()
-		curr = self.cursor()
-
-		curr.execute("SELECT * FROM product_type;")
-		result = curr.fetchall()
-		self.close()
-
-		if not len(result):
-			return -1
-		
-		return result
-
 	def get_all_products(self):
 		conn = self.db()
 		conn.commit()
@@ -107,14 +93,6 @@ class ProductDatabase(DatabaseBase):
 		self.close()
 
 		return rows_deleted
-# }
-
-def product_all_types_get():
-# {
-    pd = ProductDatabase()
-    product_types = pd.get_all_product_types()
-
-    return product_types
 # }
 
 def product_all_get():
