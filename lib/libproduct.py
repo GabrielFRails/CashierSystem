@@ -4,7 +4,7 @@ from lib.libetl import *
 
 class ProductDatabase(DatabaseBase):
 # {
-	def __init__(self, database="market_place"):
+	def __init__(self, database="marketplace"):
 		super().__init__()
 		self.connect_loop(database)
 
