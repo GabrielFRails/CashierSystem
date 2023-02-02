@@ -28,10 +28,10 @@ class ProductTypeDatabase(DatabaseBase):
         conn.commit()
         curr = self.cursor()
 
-        sql_query = f"""SELECT * FROM product_type p WHERE p.id_type = '{id}';"""
+        sql_query = f"""SELECT * FROM product_type as pt WHERE pt.id_type = '{id}';"""
 
         curr.execute(sql_query)
-        result = curr. fetchall()
+        result = curr.fetchall()
         self.close()
 
         if not result:
@@ -56,11 +56,13 @@ class ProductTypeDatabase(DatabaseBase):
             return -1
 
         self.close()
+        return 0
     
     def update_product_type(self, product_type):
         conn = self.db()
         conn.commit()
-        surr = self.cursor()
+        curr = self.cursor()
+        rc = -1
 
         sql_query = f"""UPDATE product_type
         SET description = '{product_type['description']}
@@ -69,13 +71,12 @@ class ProductTypeDatabase(DatabaseBase):
         try:
             curr.execute(sql_query)
             conn.commit()
+            rc = curr.rowcount
         except Exception as e:
             print(str(e))
-            self.close()
-            return -1
 
         self.close()
-        return 0
+        return rc
 
     def delete_product_type(self, id):
         conn = self.db()
@@ -87,7 +88,6 @@ class ProductTypeDatabase(DatabaseBase):
         curr.execute(sql_query)
         rows_deleted = curr.rowcount
         conn.commit()
-        self.close()
         self.close()
 
         return rows_deleted
