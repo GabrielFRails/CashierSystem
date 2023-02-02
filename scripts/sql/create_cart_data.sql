@@ -11,9 +11,9 @@ CREATE TABLE cart (
 	discount NUMERIC,
 	id_product INTEGER,
 	id_customer INTEGER,
-	CONSTRAINT cart_pkey PRIMARY KEY (id_Cart),
+	CONSTRAINT cart_pkey PRIMARY KEY (id_cart),
 	CONSTRAINT cart_id_product_fkey FOREIGN KEY (id_product)
 	REFERENCES product (id_product),
 	CONSTRAINT cart_id_customer_fkey FOREIGN KEY (id_customer)
-	REFERENCES customer (id_customer);
+	REFERENCES customer (id_customer)
 );
