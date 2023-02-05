@@ -22,7 +22,8 @@ CREATE TABLE product (
 	id_type INTEGER NOT NULL,
 	CONSTRAINT product_pkey PRIMARY KEY (id_product),
 	CONSTRAINT product_id_type_fkey FOREIGN KEY (id_type)
-	REFERENCES product_type (id_type)
+		REFERENCES product_type (id_type)
+		ON DELETE CASCADE
 );
 
 CREATE SEQUENCE pid_seq
