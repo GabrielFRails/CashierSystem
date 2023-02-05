@@ -210,7 +210,7 @@ def put_product_type(data: product_type_request):
     return response
 
 @app.delete("/product/type",
-    response_model = Union[default_response_writefail_operation, dict],
+    response_model = Union[default_response_write_operation, dict],
     summary = "Delete product type data"
 )
 def delete_product_type(product_type_id: str = Query(
@@ -219,10 +219,10 @@ def delete_product_type(product_type_id: str = Query(
 )):
     rows_deleted = product_type_delete(product_type_id)
 
-    if not rows_delete:
+    if not rows_deleted:
         return {
-            "sucess": False,
-            "message": "0 rows deleted"
+            "message": "FAIL",
+            "description": "0 rows deleted"
         }
 
     response = default_response_write_operation().__dict__
