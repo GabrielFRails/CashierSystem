@@ -45,7 +45,7 @@ class ProductTypeDatabase(DatabaseBase):
         curr = self.cursor()
 
         sql_query = f"""INSERT INTO product_type (id_type, description)
-        values (nextval('ptid_seq'), {product_type['description']});"""
+        values (nextval('ptid_seq'), '{product_type['description']}');"""
 
         try:
             curr.execute(sql_query)
@@ -65,7 +65,7 @@ class ProductTypeDatabase(DatabaseBase):
         rc = -1
 
         sql_query = f"""UPDATE product_type
-        SET description = '{product_type['description']}
+        SET description = '{product_type['description']}'
         WHERE id_type = '{product_type['id_type']}';"""
 
         try:
