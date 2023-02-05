@@ -23,7 +23,7 @@ class default_response_error(default_response):
 class default_product_get_error(default_response_error):
     description: str = "Product not found"
 
-class default_productlist_get_error(default_response_error):
+class default_list_get_error(default_response_error):
     description: str = "No product data found in database"
 
 class default_product_type_get_error(default_response_error):
@@ -105,4 +105,33 @@ class product_type_list(BaseModel):
     )
     count: int = Field(
         0
+    )
+
+class customer(BaseModel):
+    id_customer: int = Field(
+        0   
+    )
+    name: str = Field(
+        ""
+    )
+    phone: str = Field(
+        ""
+    )
+
+class customer_list(BaseModel):
+# {
+    customers: list[customer] = Field(
+        []
+    )
+    count: int = Field(
+        0
+    )
+# }
+
+class customer_request(BaseModel):
+    name: str = Field(
+        ""
+    )
+    phone: str = Field(
+        ""
     )
