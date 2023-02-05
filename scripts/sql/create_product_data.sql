@@ -30,7 +30,7 @@ CREATE SEQUENCE pid_seq
 	AS INT
 	START WITH 1
 	INCREMENT BY 1
-	OWNED BY product.id_type;
+	OWNED BY product.id_product;
 
 INSERT INTO product_type (id_type, description)
 values	(nextval('ptid_seq'), 'Beverages'),
