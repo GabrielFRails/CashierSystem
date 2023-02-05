@@ -126,7 +126,7 @@ def product_delete(id):
 def product_post(product):
 # {
 	pd = ProductDatabase()
-	return pd.create_product(product.__dict__, id)
+	return pd.create_product(product.__dict__)
 # }
 
 def product_update(product):
