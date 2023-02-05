@@ -11,6 +11,7 @@ from lib.libapi import *
 from lib.libproduct import *
 from lib.libproducttype import *
 from lib.libetl import *
+from lib.libcustomer import *
 
 app = FastAPI()
 router = APIRouter()
@@ -56,7 +57,7 @@ def get_product_list():
     if not len(product_list) > 0:
         return JSONResponse(
 		status_code=400, 
-		content=default_productlist_get_error().dict()
+		content=default_list_get_error().dict()
 	)
 
     response = {
@@ -98,7 +99,7 @@ def put_product(data: product):
     response_model=default_response_write_operation,
     summary="Create product data"
 )
-def put_product(data: product_request):
+def post_product(data: product_request):
 # {
     r = product_post(data)
 
@@ -228,3 +229,116 @@ def delete_product_type(product_type_id: str = Query(
     response = default_response_write_operation().__dict__
     return response
 
+#customer's routes
+@app.get("/customer",
+    response_model=customer,
+    responses= {
+        400: { "model": default_product_get_error }
+    }
+)
+def get_customer(customer_id: str = Query(
+    title="",
+    description="Customer id"
+)):
+# {
+    sql_product = customer_get(customer_id)
+    if sql_product == -1:
+        return JSONResponse(
+		status_code=400, 
+		content=default_product_get_error().dict()
+	)
+
+    c = sql_product[0]
+    r = etl_customer(c)
+
+    return r
+# }
+
+@app.get("/customer/list",
+    response_model=customer_list,
+    responses= {
+        400: { "model": default_product_get_error }
+    }
+)
+def get_customer_list():
+# {
+    customer_list = customer_all_get()
+    if not len(customer_list) > 0:
+        return JSONResponse(
+		status_code=400, 
+		content=default_list_get_error().dict()
+	)
+
+    response = {
+        "customers": customer_list,
+        "count": len(customer_list)
+    }
+
+    return response
+# }
+
+@app.put("/customer", 
+    response_model=Union[default_response_write_operation, dict],
+    summary="Update customer data"
+)
+def put_customer(data: customer):
+# {
+    r = customer_update(data)
+
+    if r == -1:
+        return JSONResponse(
+		status_code=400, 
+		content=default_response_writefail_operation().dict()
+	)
+
+    if r == 0:
+        return JSONResponse(
+		status_code=400, 
+		content={
+            "success": "FALSE",
+            "message": "id not found"
+        }
+	)
+
+    response = default_response_write_operation().__dict__
+    return response
+# }
+
+@app.post("/customer", 
+    response_model=default_response_write_operation,
+    summary="Create customer data"
+)
+def post_customer(data: customer_request):
+# {
+    r = customer_post(data)
+
+    if r == -1:
+        return JSONResponse(
+		status_code=400, 
+		content=default_response_writefail_operation().dict()
+	)
+
+    response = default_response_write_operation().__dict__
+    return response
+# }
+
+@app.delete("/customer",
+    response_model=Union[default_response_write_operation, dict],
+    summary="Delete customer data"
+)
+def delete_product(customer_id: str = Query(
+    title="",
+    description="Customer id"
+)):
+# {
+    rows_deleted = customer_delete(customer_id)
+
+    if not rows_deleted:
+        return {
+            "success": False,
+            "message": "0 rows deleted"
+        }
+
+    response = default_response_write_operation().__dict__
+    return response
+# }
