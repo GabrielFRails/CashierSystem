@@ -95,7 +95,7 @@ class ProductDatabase(DatabaseBase):
 		return rows_deleted
 # }
 
-def product_all_get():
+def product_all_get() -> list:
 # {
 	pd = ProductDatabase()
 	products = pd.get_all_products()

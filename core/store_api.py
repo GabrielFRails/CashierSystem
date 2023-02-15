@@ -12,6 +12,7 @@ from lib.libproduct import *
 from lib.libproducttype import *
 from lib.libetl import *
 from lib.libcustomer import *
+from operator import itemgetter
 
 app = FastAPI()
 router = APIRouter()
@@ -60,6 +61,7 @@ def get_product_list():
 		content=default_list_get_error().dict()
 	)
 
+    product_list.sort(key=lambda x: x.id_product)
     response = {
         "products": product_list,
         "count": len(product_list)
@@ -171,6 +173,7 @@ def get_product_type_list():
             content = default_product_type_list_get_error().dict()
         )
     
+    product_type_list.sort(key=lambda x: x.id_type)
     response = {
         "product_types": product_type_list,
         "count": len(product_type_list)
@@ -269,6 +272,7 @@ def get_customer_list():
 		content=default_list_get_error().dict()
 	)
 
+    customer_list.sort(key=lambda x: x.id_customer)
     response = {
         "customers": customer_list,
         "count": len(customer_list)
