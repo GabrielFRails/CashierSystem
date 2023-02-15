@@ -79,11 +79,15 @@ CREATE TABLE cart (
 	id_cart INTEGER NOT NULL,
 	sum NUMERIC,
 	discount NUMERIC,
-	id_product INTEGER,
+	final_price NUMERIC,
 	id_customer INTEGER,
 	CONSTRAINT cart_pkey PRIMARY KEY (id_cart),
-	CONSTRAINT cart_id_product_fkey FOREIGN KEY (id_product)
-	REFERENCES product (id_product),
 	CONSTRAINT cart_id_customer_fkey FOREIGN KEY (id_customer)
 	REFERENCES customer (id_customer)
 );
+
+CREATE SEQUENCE cartid_seq
+	AS INT
+	START WITH 1
+	INCREMENT BY 1
+	OWNED BY cart.id_cart;

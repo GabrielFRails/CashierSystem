@@ -12,7 +12,6 @@ from lib.libproduct import *
 from lib.libproducttype import *
 from lib.libetl import *
 from lib.libcustomer import *
-from operator import itemgetter
 
 app = FastAPI()
 router = APIRouter()

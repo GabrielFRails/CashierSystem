@@ -1,4 +1,4 @@
-from lib.libapi import product, product_type, customer
+from lib.libapi import product, product_type, customer, cart
 
 def etl_product(p):
 # {
@@ -30,6 +30,19 @@ def etl_customer(c):
 	data.id_customer = c[0]
 	data.name = c[1]
 	data.phone = c[2]
+
+	return data
+# }
+
+def etl_cart(c):
+# {
+	data = cart()
+
+	data.id_cart = c[0]
+	data.sum = c[1]
+	data.discount = c[2]
+	data.final_price = c[3]
+	data.id_customer = c[4]
 
 	return data
 # }

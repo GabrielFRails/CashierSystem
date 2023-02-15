@@ -135,3 +135,35 @@ class customer_request(BaseModel):
     phone: str = Field(
         ""
     )
+
+class cart(BaseModel):
+    id_cart: int = Field(
+        0   
+    )
+    sum: float = Field(
+        0.0
+    )
+    discount: float = Field(
+        0.0
+    )
+    final_price: float = Field(
+        0.0
+    )
+    id_customer: int = Field(
+        0   
+    )
+
+class cart_list(BaseModel):
+# {
+    carts: list[cart] = Field(
+        []
+    )
+    count: int = Field(
+        0
+    )
+# }
+
+class cart_request(BaseModel):
+    id_customer: int = Field(
+        0   
+    )
