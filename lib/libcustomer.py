@@ -101,6 +101,9 @@ def customer_all_get():
 	customers = pd.get_all_customers()
 	customers_etl = []
 
+	if customers == -1:
+		return []
+
 	for c in customers:
 		customers_etl.append(etl_customer(c))
 

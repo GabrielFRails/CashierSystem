@@ -105,6 +105,9 @@ def product_type_all_get():
     product_types = ptd.get_all_product_types()
     product_types_etl = []
 
+    if product_types == -1:
+        return []
+
     for p in product_types:
         product_types_etl.append(etl_product_type(p))
 

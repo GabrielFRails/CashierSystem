@@ -101,6 +101,9 @@ def product_all_get() -> list:
 	products = pd.get_all_products()
 	products_etl = []
 
+	if products == -1:
+		return []
+
 	for p in products:
 		products_etl.append(etl_product(p))
 
