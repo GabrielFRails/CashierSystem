@@ -5,10 +5,18 @@
 install_requirements:
 	pip install -r ./requirements.txt
 
+runall: rm_log_dir create_log_dir runserver
+
 runserver:
 	cd ../scripts && \
 	chmod +x runapis.sh && \
 	./runapis.sh
+
+create_log_dir:
+	mkdir ../log
+
+rm_log_dir:
+	sudo rm -f -r ../log
 
 start_database:
 	cd ../scripts/sql && \
@@ -22,5 +30,5 @@ cleandata:
 restart_database: cleandata start_database
 
 log:
-	cd ../log/api/ && \
+	cd ../log/ && \
 	tail -f *api.log
