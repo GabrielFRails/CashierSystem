@@ -16,10 +16,6 @@ from lib.libcustomer import *
 app = FastAPI()
 router = APIRouter()
 
-@app.get("/system_health")
-def get_system_health():
-    return {"success": True}
-
 #product's routes
 @app.get("/product",
     response_model=product,

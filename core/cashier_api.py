@@ -16,10 +16,6 @@ from lib.libcart import *
 app = FastAPI()
 router = APIRouter()
 
-@app.get("/system_health")
-def get_system_health():
-    return {"success": True}
-
 @app.get("/cart",
     response_model=cart,
     responses= {
