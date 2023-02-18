@@ -10,7 +10,7 @@ class DatabaseBase:
 	def __init__(self):
 		self.__host = "localhost"
 		self.__user = "postgres"
-		self.__password = "postgress"
+		self.__password = "postgres"
 	
 	def connect(self, database):
 		print(f"Connecting in \nHost: {self.__host} \nUser: {self.__user} \nPassword: {self.__password}")
