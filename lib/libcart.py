@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2023 Gabriel Freitas <gabriel.estudy.reis@gmail.com>
+#
+
 from lib.libdata import *
 from lib.libutils import *
 from lib.libetl import *

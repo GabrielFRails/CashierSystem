@@ -1,5 +1,6 @@
 #
 # Copyright (c) 2023 Gabriel Freitas <gabriel.estudy.reis@gmail.com>
+# Copyright (c) 2023 Luiza Costa <oliveiraluiza2012ufg@gmail.com>
 #
 
 from fastapi import APIRouter, FastAPI, Query

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Copyright (c) 2023 Gabriel Freitas <gabriel.estudy.reis@gmail.com>
+
 export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
 export LOGDIR=../log

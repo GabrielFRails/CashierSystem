@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2023 Gabriel Freitas <gabriel.estudy.reis@gmail.com>
+#
+
 import psycopg2 as psg2
 import time
 

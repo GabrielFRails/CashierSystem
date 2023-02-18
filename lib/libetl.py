@@ -1,3 +1,8 @@
+#
+# Copyright (c) 2023 Gabriel Freitas <gabriel.estudy.reis@gmail.com>
+# Copyright (c) 2023 Luiza Costa <oliveiraluiza2012ufg@gmail.com>
+#
+
 from lib.libapi import product, product_type, customer, cart
 
 def etl_product(p):
