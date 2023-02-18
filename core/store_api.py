@@ -3,7 +3,6 @@
 #
 
 from fastapi import APIRouter, FastAPI, Query
-from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from typing import Union
 
