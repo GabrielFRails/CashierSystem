@@ -5,6 +5,8 @@ Repositório para armazenar os códigos referentes ao Trabalho Final de Discipli
 
 Open your terminal and go to solution/ dir
 
+`cd solution`
+
 Install all missing dependencies at once:
 
 `pip install -r requirements.txt`
@@ -12,6 +14,22 @@ Install all missing dependencies at once:
 Or type in your terminal:
 
 `make install_requirements`
+
+If it is the first time you run de project:
+
+`make start_database`
+
+Then:
+
+`make runall`
+
+## To see log output, type in another terminal:
+
+- `make log`
+
+## If you want a new and fresh database:
+
+- `make restart_database`
 
 ---
 
