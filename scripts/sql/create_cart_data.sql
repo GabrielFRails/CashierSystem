@@ -1,3 +1,8 @@
+/*
+* Copyright (c) 2023 Viviany Ribeiro <vivianyribeiro10.vr@gmail.com>
+* Copyright (c) 2023 Gabriel Freitas <gabriel.estudy.reis@gmail.com>
+*/
+
 CREATE TABLE customer (
 	id_customer integer,
 	name CHARACTER VARYING NOT NULL,
