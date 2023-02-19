@@ -38,3 +38,9 @@ CREATE SEQUENCE cartid_seq
 	START WITH 1
 	INCREMENT BY 1
 	OWNED BY cart.id_cart;
+
+CREATE TABLE cart_products (
+	id_cart INTEGER NOT NULL,
+	id_product INTEGER NOT NULL,
+	quantity INTEGER NOT NULL
+);

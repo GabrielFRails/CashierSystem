@@ -45,6 +45,23 @@ class ProductDatabase(DatabaseBase):
 
 		return result
 
+	def get_product_price_by_id(self, id):
+		conn = self.db()
+		conn.commit()
+		curr = self.cursor()
+
+		sql_query = f"""SELECT price FROM product as p
+		WHERE p.id_product = '{id}';"""
+
+		curr.execute(sql_query)
+		result = curr.fetchall()
+		self.close()
+
+		if not result:
+			return -1
+
+		return result
+
 	def create_product(self, product):
 		conn = self.db()
 		conn.commit()
@@ -120,6 +137,14 @@ def product_get(id):
 	product = pd.get_product_by_id(id)
 
 	return product
+# }
+
+def product_price_get(id):
+# {
+	pd = ProductDatabase()
+	final_price = pd.get_product_price_by_id(id)
+
+	return float(final_price[0][0])
 # }
 
 def product_delete(id):

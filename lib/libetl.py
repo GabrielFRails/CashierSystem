@@ -51,3 +51,19 @@ def etl_cart(c):
 
 	return data
 # }
+
+def etl_cart_product_list(product_list):
+# {
+	data = []
+
+	for p in product_list:
+		p_dict = {
+			"id_cart": p[0],
+			"id_product": p[1],
+			"product_quantity": p[2]
+		}
+
+		data.append(p_dict)
+
+	return data
+# }

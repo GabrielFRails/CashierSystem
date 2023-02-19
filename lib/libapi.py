@@ -168,3 +168,22 @@ class cart_request(BaseModel):
     id_customer: int = Field(
         0   
     )
+
+class cart_products(BaseModel):
+    id_cart: int = Field(
+        None   
+    )
+    id_product: int = Field(
+        None   
+    )
+    quantity: int = Field(
+        1   
+    )
+
+class final_cart(BaseModel):
+    id_cart: int = Field(
+        None   
+    )
+    discount: float = Field(
+        None
+    )

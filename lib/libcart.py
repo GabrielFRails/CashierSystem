@@ -5,6 +5,7 @@
 from lib.libdata import *
 from lib.libutils import *
 from lib.libetl import *
+from lib.libproduct import product_price_get
 
 class CartDatabase(DatabaseBase):
 # {
@@ -66,7 +67,7 @@ class CartDatabase(DatabaseBase):
 		self.close()
 		return 0
 	
-	def update_product(self, cart):
+	def update_cart(self, cart):
 		conn = self.db()
 		conn.commit()
 		curr = self.cursor()
@@ -75,6 +76,46 @@ class CartDatabase(DatabaseBase):
 		sql_query = f"""UPDATE cart
 		SET sum = '{cart['sum']}', discount = {cart['discount']}, final_price = {cart['final_price']}
 		WHERE id_cart = '{cart['id_cart']}';"""
+
+		try:
+			curr.execute(sql_query)
+			conn.commit()
+			rc = curr.rowcount
+		except Exception as e:
+			print(str(e))
+		
+		self.close()
+		return rc
+
+	def add_discount(self, id_cart, discount):
+		conn = self.db()
+		conn.commit()
+		curr = self.cursor()
+		rc = -1
+
+		sql_query = f"""UPDATE cart
+		SET discount = {discount}
+		WHERE id_cart = {id_cart};"""
+
+		try:
+			curr.execute(sql_query)
+			conn.commit()
+			rc = curr.rowcount
+		except Exception as e:
+			print(str(e))
+		
+		self.close()
+		return rc
+
+	def set_final_price(self, id_cart, final_price):
+		conn = self.db()
+		conn.commit()
+		curr = self.cursor()
+		rc = -1
+
+		sql_query = f"""UPDATE cart
+		SET final_price = {final_price}
+		WHERE id_cart = {id_cart};"""
 
 		try:
 			curr.execute(sql_query)
@@ -99,6 +140,44 @@ class CartDatabase(DatabaseBase):
 		self.close()
 
 		return rows_deleted
+
+	def add_cart_product(self, id_cart, id_product, quantity):
+		conn = self.db()
+		conn.commit()
+		curr = self.cursor()
+
+		sql_query = f"""
+			INSERT INTO cart_products (id_cart, id_product, quantity)
+			values ({id_cart}, {id_product}, {quantity})
+		"""
+
+		try:
+			curr.execute(sql_query)
+			conn.commit()
+		except Exception as e:
+			print(str(e))
+			self.close()
+			return -1
+		
+		self.close()
+		return 0
+
+	def get_cart_products(self, id_cart):
+		conn = self.db()
+		conn.commit()
+		curr = self.cursor()
+
+		sql_query = f"""SELECT * FROM cart_products as c
+		WHERE c.id_cart = '{id_cart}';"""
+
+		curr.execute(sql_query)
+		result = curr.fetchall()
+		self.close()
+
+		if not result:
+			return -1
+
+		return result
 # }
 
 def cart_all_get() -> list:
@@ -139,6 +218,50 @@ def cart_post(cart):
 # }
 
 def cart_update(cart):
+# {
 	cd = CartDatabase()
 
 	return cd.update_cart(cart.__dict__)
+# }
+
+def cart_add_discount(id_cart, discount):
+	cd = CartDatabase()
+
+	cd.add_discount(id_cart, discount)
+
+def cart_add_sum(id_cart, sum, discount):
+	cd = CartDatabase()
+
+	if discount > 0:
+		sum = sum - (sum * discount / 100)
+
+	return cd.set_final_price(id_cart, sum)
+
+def cart_productlist(id_cart, id_product, quantity):
+# {
+	cd = CartDatabase()
+
+	return cd.add_cart_product(id_cart, id_product, quantity)
+# }
+
+def cart_products_get(id_cart):
+# {
+	cd = CartDatabase()
+
+	return cd.get_cart_products(id_cart)
+# }
+
+def cart_calculate_sum(product_list):
+# {
+	sum = 0
+	for p in product_list:
+		id_product = p.get('id_product')
+		p_price = product_price_get(id_product)
+		print(f"test: {p.get('product_quantity')}")
+		p_final_price = p_price * float(p.get('product_quantity'))
+		print(f"final price {p_final_price}")
+
+		sum = sum + p_final_price
+
+	return sum
+# }
