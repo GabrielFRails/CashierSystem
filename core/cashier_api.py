@@ -197,12 +197,14 @@ def add_cart_product(data: final_cart):
                 "success": False
             }
 
+        cart_close(data.id_cart)
         sql_product = cart_get(data.id_cart)
         if sql_product == -1:
             return JSONResponse(
             status_code=400, 
             content=default_product_get_error().dict()
         )
+
 
         c = sql_product[0]
         r = etl_cart(c)

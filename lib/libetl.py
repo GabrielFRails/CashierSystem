@@ -48,6 +48,7 @@ def etl_cart(c):
 	data.discount = c[2]
 	data.final_price = c[3]
 	data.id_customer = c[4]
+	data.cart_status = c[5]
 
 	return data
 # }

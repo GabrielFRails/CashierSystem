@@ -28,6 +28,7 @@ CREATE TABLE cart (
 	discount NUMERIC,
 	final_price NUMERIC,
 	id_customer INTEGER,
+	cart_status CHARACTER VARYING,
 	CONSTRAINT cart_pkey PRIMARY KEY (id_cart),
 	CONSTRAINT cart_id_customer_fkey FOREIGN KEY (id_customer)
 	REFERENCES customer (id_customer)

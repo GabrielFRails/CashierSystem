@@ -153,6 +153,9 @@ class cart(BaseModel):
     id_customer: int = Field(
         0   
     )
+    cart_status: str = Field(
+        ""
+    )
 
 class cart_list(BaseModel):
 # {

@@ -53,8 +53,8 @@ class CartDatabase(DatabaseBase):
 		conn.commit()
 		curr = self.cursor()
 
-		sql_query = f"""INSERT INTO cart (id_cart, sum, discount, final_price, id_customer)
-		values	(nextval('cartid_seq'), 0, 0, 0, {cart['id_customer']});"""
+		sql_query = f"""INSERT INTO cart (id_cart, sum, discount, final_price, id_customer, cart_status)
+		values	(nextval('cartid_seq'), 0, 0, 0, {cart['id_customer']}, 'open');"""
 
 		try:
 			curr.execute(sql_query)
@@ -115,6 +115,26 @@ class CartDatabase(DatabaseBase):
 
 		sql_query = f"""UPDATE cart
 		SET final_price = {final_price}
+		WHERE id_cart = {id_cart};"""
+
+		try:
+			curr.execute(sql_query)
+			conn.commit()
+			rc = curr.rowcount
+		except Exception as e:
+			print(str(e))
+		
+		self.close()
+		return rc
+
+	def close_cart(self, id_cart):
+		conn = self.db()
+		conn.commit()
+		curr = self.cursor()
+		rc = -1
+
+		sql_query = f"""UPDATE cart
+		SET cart_status = 'closed'
 		WHERE id_cart = {id_cart};"""
 
 		try:
@@ -264,4 +284,11 @@ def cart_calculate_sum(product_list):
 		sum = sum + p_final_price
 
 	return sum
+# }
+
+def cart_close(id_cart):
+# {
+	cd = CartDatabase()
+
+	return cd.close_cart(id_cart)
 # }
