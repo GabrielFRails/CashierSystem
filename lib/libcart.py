@@ -277,9 +277,7 @@ def cart_calculate_sum(product_list):
 	for p in product_list:
 		id_product = p.get('id_product')
 		p_price = product_price_get(id_product)
-		print(f"test: {p.get('product_quantity')}")
 		p_final_price = p_price * float(p.get('product_quantity'))
-		print(f"final price {p_final_price}")
 
 		sum = sum + p_final_price
 
