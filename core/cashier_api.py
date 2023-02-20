@@ -148,7 +148,7 @@ def add_cart_product(data: cart_products):
 # }
 
 @app.get("/cart/produtcs", 
-    summary="Close cart and calculate total sum"
+    summary="Get cart products and partical sum by id"
 )
 def get_cart_products(cart_id: str = Query(
     title="",
@@ -157,6 +157,7 @@ def get_cart_products(cart_id: str = Query(
 # {
     product_list = cart_products_get(cart_id)
     product_list_etl = etl_cart_product_list(product_list)
+    sum = cart_calculate_sum(product_list_etl)
 
     if not len(product_list_etl):
         return {
@@ -166,8 +167,8 @@ def get_cart_products(cart_id: str = Query(
 
     return {
         "success": True,
-        "products": product_list_etl,
-        "count": len(product_list_etl)
+        "partial_sum": sum,
+        "products": product_list_etl
     }
 # }
 
