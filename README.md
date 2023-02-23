@@ -23,7 +23,7 @@ Then:
 
 `make runall`
 
-### The two api's can be found at:
+### The two api's can be access at:
 - localhost:4200/docs
 - localhost:4300/docs
 
