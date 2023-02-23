@@ -23,6 +23,10 @@ Then:
 
 `make runall`
 
+### The two api's can be found at:
+- localhost:4200/docs
+- localhost:4300/docs
+
 ## To see log output, type in another terminal:
 
 - `make log`
